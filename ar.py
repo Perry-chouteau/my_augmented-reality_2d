@@ -7,10 +7,26 @@ import numpy as np
 
 cap = cv2.VideoCapture(0)
 
-image_src = cv2.imread("image.jpg")
+# v pick video or image
+vid = cv2.VideoCapture("video.mp4")
+#image_src = cv2.imread("image.jpg")
+# ^ pick video or image
 
 while cap.isOpened():
     success, imgWebcam = cap.read()
+
+    # v using video
+    success2, imgVid = vid.read()
+
+    if not success2:
+#        break
+        vid = cv2.VideoCapture("video.mp4")
+        success2, imgVid = vid.read()
+        if not success2:
+            break
+
+    image_src = imgVid
+    # ^ using video
 
     if not success:
         break
